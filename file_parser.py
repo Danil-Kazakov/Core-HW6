@@ -71,16 +71,18 @@ def scan(folder: Path):
             continue
 
         # Робота з файлом
+        # Робота з файлом
         extension = get_extension(item.name)  # беремо розширення файлу
         full_name = folder / item.name  # беремо повний шлях до файлу
         if not extension:
             MY_OTHER.append(full_name)
         else:
             try:
-                REGISTER_EXTENSION[extension]
+                ext_reg = REGISTER_EXTENSION[extension]
+                ext_reg.append(full_name)
                 EXTENSIONS.add(extension)
             except KeyError:
-                UNKNOWN.add(extension)  # .mp4, .mov, .avi
+                UNKNOWN.add(extension)
                 MY_OTHER.append(full_name)
 
 if __name__ == '__main__':
